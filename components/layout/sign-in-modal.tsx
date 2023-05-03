@@ -38,7 +38,7 @@ const SignInModal = ({
             picture will be stored.
           </p>
         </div>
-
+        
         <div className="flex flex-col space-y-4 bg-gray-50 px-4 py-8 md:px-16">
           <button
             disabled={signInClicked}
