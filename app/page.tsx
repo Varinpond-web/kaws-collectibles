@@ -6,8 +6,10 @@ import WebVitals from "@/components/home/web-vitals";
 import ComponentGrid from "@/components/home/component-grid";
 import Image from "next/image";
 import { nFormatter } from "@/lib/utils";
+import prisma from "@/app/prisma";
 
 export default async function Home() {
+  const posts = await prisma.post.findMany();
   const { stargazers_count: stars } = await fetch(
     "https://api.github.com/repos/steven-tey/precedent",
     {
@@ -32,6 +34,11 @@ export default async function Home() {
           style={{ animationDelay: "0.15s", animationFillMode: "forwards" }}
         >
           <Balancer>Hottest post  !</Balancer>
+          <ul>
+            {posts.map((post) => (
+              <li key={post.id}>{post.title}</li>
+            ))}
+          </ul>
         </h3>
         <div
           className="mx-auto mt-6 flex animate-fade-up items-center justify-center space-x-5 opacity-0"
