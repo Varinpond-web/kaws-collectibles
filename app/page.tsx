@@ -30,13 +30,16 @@ export default async function Home() {
     <>
       <div className="z-10 w-full max-w-xl px-5 xl:px-0">
         <h3
-          className="animate-fade-up bg-gradient-to-br from-black to-stone-500 bg-clip-text text-center font-display text-4xl font-bold tracking-[-0.02em] text-transparent opacity-0 drop-shadow-sm md:text-10l md:leading-[5rem]"
+          className="animate-fade-up bg-gradient-to-br from-black to-stone-500 bg-clip-text font-display tracking-[-0.02em] text-transparent opacity-0 drop-shadow-sm"
           style={{ animationDelay: "0.15s", animationFillMode: "forwards" }}
         >
-          <Balancer>Hottest post  !</Balancer>
+          <Balancer className="text-2xl text-center my-8">Hottest post  !</Balancer>
           <ul>
             {posts.map((post) => (
-              <li key={post.id}>{post.title}</li>
+              <li key={post.id}>
+                <h2 className="text-lg">{post.title}</h2>
+                <p className="text-sm mb-8">{post.content}</p>
+              </li>
             ))}
           </ul>
         </h3>
