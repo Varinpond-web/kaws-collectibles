@@ -2,11 +2,13 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from 'react';
+import { useSession } from "next-auth/react"
 
 export default function PostComponent() {
     const router = useRouter();
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
+    const { data: session, status } = useSession()
 
     const update = async () => {
       console.log(title, content);
@@ -18,6 +20,7 @@ export default function PostComponent() {
         body: JSON.stringify({
             title: title,
             content: content,
+            userName: session?.user?.name,
             published: true,
         }),
       });
@@ -27,7 +30,7 @@ export default function PostComponent() {
     return (
       <div className="animate-fade-up bg-gradient-to-br from-black to-stone-500 bg-clip-text font-display tracking-[-0.02em] text-transparent opacity-0 drop-shadow-sm"
       style={{ animationDelay: "0.15s", animationFillMode: "forwards" }}>
-        <h1 className="text-3xl font-bold mb-5">Create Post</h1>
+        <h1 className="text-3xl font-bold mb-5">Create Post from {session?.user?.name}</h1>
             <form onSubmit={() => update()}>
                 <div className="mb-4">
                     <label className="block text-gray-700 font-bold mb-2" >Title</label>

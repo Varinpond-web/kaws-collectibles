@@ -7,9 +7,11 @@ import ComponentGrid from "@/components/home/component-grid";
 import Image from "next/image";
 import { nFormatter } from "@/lib/utils";
 import prisma from "@/app/prisma";
+import PostObject from "@/components/layout/post";
+import { useRouter } from "next/navigation";
+import { useState } from 'react';
 
 export default async function Home() {
-  const posts = await prisma.post.findMany();
   const { stargazers_count: stars } = await fetch(
     "https://api.github.com/repos/steven-tey/precedent",
     {
@@ -25,7 +27,22 @@ export default async function Home() {
   )
     .then((res) => res.json())
     .catch((e) => console.log(e));
-
+  
+  // delete
+  // const [deleteid, setDeleteid] = useState('');
+  // const router = useRouter();
+  // function delete(){
+  //   await fetch(`/api/delete`, {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify({
+  //         id: deleteid,
+  //     }),
+  //   });
+  //    router.refresh();
+  // };
   return (
     <>
       <div className="z-10 w-full max-w-xl px-5 xl:px-0">
@@ -35,13 +52,9 @@ export default async function Home() {
         >
           <Balancer className="text-2xl text-center my-8">Hottest post  !</Balancer>
           <ul>
-            {posts.map((post) => (
-              <li key={post.id}>
-                <h2 className="text-lg">{post.title}</h2>
-                <p className="text-sm mb-8">{post.content}</p>
-              </li>
-            ))}
+            <PostObject/>
           </ul>
+          
         </h3>
         <div
           className="mx-auto mt-6 flex animate-fade-up items-center justify-center space-x-5 opacity-0"
