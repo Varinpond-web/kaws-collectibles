@@ -1,5 +1,15 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'varinstorage.blob.core.windows.net',
+        port: '',
+        pathname: '/image/**',
+      },
+    ],
+  },
   reactStrictMode: true,
   experimental: {
     appDir: true,
