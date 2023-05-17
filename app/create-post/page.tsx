@@ -6,12 +6,14 @@ import { useSession } from "next-auth/react"
 import axios from 'axios';
 import { Buffer } from 'buffer';
 import { BlobServiceClient } from '@azure/storage-blob';
+import { v4 as uuidv4 } from 'uuid';
+
 export default function PostComponent() {
     const router = useRouter();
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const { data: session, status } = useSession()
-
+    
     const update = async () => {
       console.log(title, content);
       await fetch(`/api/create`, {
@@ -51,13 +53,13 @@ export default function PostComponent() {
   
     const handleImageUpload = async () => {
       if (base64Image) {
+
         const AZURE_STORAGE_CONNECTION_STRING = 'BlobEndpoint=https://varinstorage.blob.core.windows.net/;QueueEndpoint=https://varinstorage.queue.core.windows.net/;FileEndpoint=https://varinstorage.file.core.windows.net/;TableEndpoint=https://varinstorage.table.core.windows.net/;SharedAccessSignature=sv=2022-11-02&ss=bfqt&srt=sco&sp=rwdlacupiytfx&se=2023-10-06T18:47:27Z&st=2023-05-16T10:47:27Z&spr=https,http&sig=3VpVJpWO9PFYTKo1hUtuPhuPk8l7SildoJIw0J1ESRU%3D';
         const blobServiceClient = BlobServiceClient.fromConnectionString(AZURE_STORAGE_CONNECTION_STRING);
         const containerClient = blobServiceClient.getContainerClient('image'); // Replace with your container name
-        const blockBlobClient = containerClient.getBlockBlobClient('my-image.jpeg');
-        
+        const randomFileName = `${uuidv4()}.jpeg`;
+        const blockBlobClient = containerClient.getBlockBlobClient(randomFileName);
         const base64Image_re = base64Image.replace(/^data:image\/\w+;base64,/, "");
-        
         const buffer = Buffer.from(base64Image_re, 'base64');
         console.log("Buffer:", buffer);
         const options = {
@@ -66,21 +68,7 @@ export default function PostComponent() {
             }
           };
         const uploadBlobResponse = await blockBlobClient.uploadData(buffer, options);
-      //   const response = await fetch('/api/test', {
-      //     method: 'POST',
-      //     headers: {
-      //       'Content-Type': 'application/json',
-      //     },
-      //     body: JSON.stringify({
-      //       image: base64Image,
-      //     }),
-      //   });
-    
-      //   if (!response.ok) {
-      //     console.error('Failed to send image to API');
-      //   }
       }
-      // Handle any success logic or display a success message to the user
 
       router.refresh();
     };
