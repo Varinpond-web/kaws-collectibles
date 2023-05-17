@@ -1,9 +1,11 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useState } from 'react';
+import React ,{ useState, ChangeEvent } from 'react';
 import { useSession } from "next-auth/react"
-
+import axios from 'axios';
+import { Buffer } from 'buffer';
+import { BlobServiceClient } from '@azure/storage-blob';
 export default function PostComponent() {
     const router = useRouter();
     const [title, setTitle] = useState('');
@@ -24,7 +26,63 @@ export default function PostComponent() {
             published: true,
         }),
       });
-       router.refresh();
+      router.refresh();
+    };
+    //image upload
+    const [selectedImage, setSelectedImage] = useState<File | null>(null);
+    const [base64Image, setBase64Image] = useState<string | null>(null);
+    const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
+      if (event.target.files && event.target.files.length > 0) {
+        setSelectedImage(event.target.files[0]);
+        console.log("selectedImage:")
+        console.log(selectedImage)
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          // The result attribute contains the data as a base64 encoded string
+          const base64 = reader.result as string;
+          setBase64Image(base64)
+        };
+    
+        // Start reading the file
+        // This will trigger the onloadend event when done
+        reader.readAsDataURL(event.target.files[0]);
+      }
+    };
+  
+    const handleImageUpload = async () => {
+      if (base64Image) {
+        const AZURE_STORAGE_CONNECTION_STRING = 'BlobEndpoint=https://varinstorage.blob.core.windows.net/;QueueEndpoint=https://varinstorage.queue.core.windows.net/;FileEndpoint=https://varinstorage.file.core.windows.net/;TableEndpoint=https://varinstorage.table.core.windows.net/;SharedAccessSignature=sv=2022-11-02&ss=bfqt&srt=sco&sp=rwdlacupiytfx&se=2023-10-06T18:47:27Z&st=2023-05-16T10:47:27Z&spr=https,http&sig=3VpVJpWO9PFYTKo1hUtuPhuPk8l7SildoJIw0J1ESRU%3D';
+        const blobServiceClient = BlobServiceClient.fromConnectionString(AZURE_STORAGE_CONNECTION_STRING);
+        const containerClient = blobServiceClient.getContainerClient('image'); // Replace with your container name
+        const blockBlobClient = containerClient.getBlockBlobClient('my-image.jpeg');
+        
+        const base64Image_re = base64Image.replace(/^data:image\/\w+;base64,/, "");
+        
+        const buffer = Buffer.from(base64Image_re, 'base64');
+        console.log("Buffer:", buffer);
+        const options = {
+            blobHTTPHeaders: {
+              blobContentType: 'image/jpeg'
+            }
+          };
+        const uploadBlobResponse = await blockBlobClient.uploadData(buffer, options);
+      //   const response = await fetch('/api/test', {
+      //     method: 'POST',
+      //     headers: {
+      //       'Content-Type': 'application/json',
+      //     },
+      //     body: JSON.stringify({
+      //       image: base64Image,
+      //     }),
+      //   });
+    
+      //   if (!response.ok) {
+      //     console.error('Failed to send image to API');
+      //   }
+      }
+      // Handle any success logic or display a success message to the user
+
+      router.refresh();
     };
   
     return (
@@ -46,7 +104,10 @@ export default function PostComponent() {
                     </button>
                 </div>
             </form>
+            <input type="file" accept="image/*" onChange={handleImageChange} />
+            <button onClick={handleImageUpload}>Upload Image</button>
         </div>
+
     );
   }
 
