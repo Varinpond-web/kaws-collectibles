@@ -49,7 +49,6 @@ export default function PostComponent() {
     }, [imageId]); // Only re-run the effect if imageId changes
 
     const update = async (e: React.FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
       if (base64Image) {
         console.log("c1");
         const AZURE_STORAGE_CONNECTION_STRING = 'BlobEndpoint=https://varinstorage.blob.core.windows.net/;QueueEndpoint=https://varinstorage.queue.core.windows.net/;FileEndpoint=https://varinstorage.file.core.windows.net/;TableEndpoint=https://varinstorage.table.core.windows.net/;SharedAccessSignature=sv=2022-11-02&ss=bfqt&srt=sco&sp=rwdlacupiytfx&se=2023-10-06T18:47:27Z&st=2023-05-16T10:47:27Z&spr=https,http&sig=3VpVJpWO9PFYTKo1hUtuPhuPk8l7SildoJIw0J1ESRU%3D'; // truncated for brevity

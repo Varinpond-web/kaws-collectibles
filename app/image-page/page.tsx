@@ -1,8 +1,5 @@
 import React from 'react';
-import axios from 'axios';
-import { GetServerSideProps } from 'next';
 import getImageUrl from 'azureBlobStorage';
-import Image from 'next/image';
 
 export default async function ImagePage() {
   const containerName = 'image';

@@ -2,12 +2,15 @@
 import { useState, useEffect } from 'react';
 import prisma from "@/app/prisma";
 import DeleteButton from "./deletebutton";
-
+import React from 'react';
+import getImageUrl from 'azureBlobStorage';
+import { ImagePost } from './imagepost';
 interface Post {
   id: number; // or string, depending on your data structure
   title: string;
   content: string;
   userName: string;
+  pictureId: string;
   // Include any other fields that a Post object might have
 }
 
@@ -26,16 +29,16 @@ export default function PostObject() {
     return <div>Loading...</div>;
   }
 
+  // put image in here
   return (
     <div className="animate-fade-up bg-gradient-to-br from-black to-stone-500 bg-clip-text font-display tracking-[-0.02em] text-transparent opacity-0 drop-shadow-sm"
     style={{ animationDelay: "0.15s", animationFillMode: "forwards" }}>
-      <h1 className="text-3xl font-bold mb-5">Create Post</h1>
       {posts.map((post) => (
-          <li key={post.id}>
-              <h2 className="text-lg">{post.id} </h2>
-              <h2 className="text-lg">{post.title}</h2>
+          <li key={post.id} className="bg-white border border-gray-200 rounded shadow-lg p-6 text-black mb-10">
+              <h2 className="text-lg">Title: {post.title}</h2>
               <p className="text-sm">{post.content}</p>
-              <p className="text-sm">{post.userName}</p>
+              <ImagePost blobName={post.pictureId}/>
+              <p className="text-sm">by {post.userName}</p>
               <DeleteButton id={post.id} />
           </li>
       ))}
