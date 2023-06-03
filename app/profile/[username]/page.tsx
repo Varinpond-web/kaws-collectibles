@@ -53,14 +53,13 @@ export default function Page({ params }: { params: { username: string }}) {
       }),})
         .then(response => response.json())
         .then(data => setImage(data.image));
-  }, []);
+  }, [username]);
 
   if (posts.length === 0) {
     return <div>Loading...</div>;
   }
   return (
-    <div className="animate-fade-up bg-gradient-to-br from-black to-stone-500 bg-clip-text font-display tracking-[-0.02em] text-transparent opacity-0 drop-shadow-sm"className="animate-fade-up bg-gradient-to-br from-black to-stone-500 bg-clip-text font-display tracking-[-0.02em] text-transparent opacity-0 drop-shadow-sm"
-    style={{ animationDelay: "0.15s", animationFillMode: "forwards" }}>
+    <div>
       <div
         className="mb-10 rounded border border-gray-200 bg-white p-6 text-black shadow-lg"
         style={{
@@ -86,8 +85,8 @@ export default function Page({ params }: { params: { username: string }}) {
         </div>
       <div/>
       <div className='bg-white border border-gray-200 rounded shadow-lg p-6 text-black mb-10 grid grid-cols-3 gap-4'>
-        {posts.map((post) => (
-          <ImagePost blobName={post.pictureId}/>
+        {posts.map((post,index) => (
+          <ImagePost key={index} blobName={post.pictureId}/>
         ))}
       </div>
     </div>

@@ -46,7 +46,7 @@ export default function PostComponent() {
       }
       console.log("call fetchUpload");
       fetchUpload();
-    }, [imageId]); // Only re-run the effect if imageId changes
+    }, [imageId, title, content, session?.user?.name]); // Only re-run the effect if imageId changes
 
     const update = async (e: React.FormEvent<HTMLFormElement>) => {
       if (base64Image) {

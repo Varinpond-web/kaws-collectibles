@@ -29,7 +29,7 @@ export default function PostObject({username}: PostObjectProps) {
     }),})
       .then(response => response.json())
       .then(data => setPosts(data));
-  }, []);
+  }, [username]);
 
   if (posts.length === 0) {
     return <div>Loading...</div>;
@@ -40,8 +40,8 @@ export default function PostObject({username}: PostObjectProps) {
     <div className="animate-fade-up bg-gradient-to-br from-black to-stone-500 bg-clip-text font-display tracking-[-0.02em] text-transparent opacity-0 drop-shadow-sm"
     style={{ animationDelay: "0.15s", animationFillMode: "forwards" }}>
       <div className='bg-white border border-gray-200 rounded shadow-lg p-6 text-black mb-10 grid grid-cols-3 gap-4'>
-        {posts.map((post) => (
-          <ImagePost blobName={post.pictureId}/>
+        {posts.map((post, index) => (
+          <ImagePost key={index} blobName={post.pictureId}/>
         ))}
       </div>
 

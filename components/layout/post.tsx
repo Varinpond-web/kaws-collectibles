@@ -33,8 +33,8 @@ export default function PostObject() {
   return (
     <div className="animate-fade-up bg-gradient-to-br from-black to-stone-500 bg-clip-text font-display tracking-[-0.02em] text-transparent opacity-0 drop-shadow-sm"
     style={{ animationDelay: "0.15s", animationFillMode: "forwards" }}>
-      {posts.map((post) => (
-          <li key={post.id} className="bg-white border border-gray-200 rounded shadow-lg p-6 text-black mb-10">
+      {posts.map((post, index) => (
+          <li key={index} className="bg-white border border-gray-200 rounded shadow-lg p-6 text-black mb-10">
               <h2 className="text-lg">Title: {post.title}</h2>
               <p className="text-sm">{post.content}</p>
               <ImagePost blobName={post.pictureId}/>
