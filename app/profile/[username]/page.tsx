@@ -22,7 +22,7 @@ export default function Page({ params }: { params: { username: string }}) {
   const [email, setEmail] = useState<string>();
   const [image, setImage] = useState<string>();
   console.log("username:",username);
-
+  
   useEffect(() => {
     fetch('/api/getmypost', {method: "POST",
     headers: {

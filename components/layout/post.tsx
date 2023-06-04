@@ -5,6 +5,7 @@ import DeleteButton from "./deletebutton";
 import React from 'react';
 import getImageUrl from 'azureBlobStorage';
 import { ImagePost } from './imagepost';
+import { useSession } from "next-auth/react"
 interface Post {
   id: number; // or string, depending on your data structure
   title: string;
@@ -15,6 +16,7 @@ interface Post {
 }
 
 export default function PostObject() {
+  const { data: session, status } = useSession()
   const [posts, setPosts] = useState<Post[]>([]);
 
   useEffect(() => {
@@ -39,7 +41,7 @@ export default function PostObject() {
               <p className="text-sm">{post.content}</p>
               <ImagePost blobName={post.pictureId}/>
               <p className="text-sm">by {post.userName}</p>
-              <DeleteButton id={post.id} />
+              {session?.user?.name === post.userName && <DeleteButton id={post.id} />} 
           </li>
       ))}
       </div>
