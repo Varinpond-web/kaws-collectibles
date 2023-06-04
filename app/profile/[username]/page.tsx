@@ -59,7 +59,8 @@ export default function Page({ params }: { params: { username: string }}) {
     return <div>Loading...</div>;
   }
   return (
-    <div>
+    <div className="animate-fade-up bg-gradient-to-br from-black to-stone-500 bg-clip-text text-center font-display "
+    style={{ animationDelay: "0.15s", animationFillMode: "forwards" }}>
       <div
         className="mb-10 rounded border border-gray-200 bg-white p-6 text-black shadow-lg"
         style={{
