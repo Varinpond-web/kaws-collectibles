@@ -25,7 +25,7 @@ export default function NavBar({ session }: { session: Session | null }) {
   const handleBlur = () => {
     setTimeout(() => {
       setSearchbar(false);
-    }, 100);
+    }, 300);
   }
 
   const handleText = (event: React.ChangeEvent<HTMLInputElement>) => {
