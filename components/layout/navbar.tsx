@@ -105,6 +105,12 @@ export default function NavBar({ session }: { session: Session | null }) {
               >
                 My collectibles
               </Link>
+              <Link
+                href="/create-collection"
+                className="block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-black mr-8"
+              >
+                Manage Collection
+              </Link>
             </div>
           </div>
           <div className="ml-auto block lg:hidden">

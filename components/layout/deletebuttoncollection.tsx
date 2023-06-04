@@ -1,16 +1,15 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-
 interface DeleteButtonProps {
-    id: string | number;  // Update the type based on your data
+    id: string;  // Update the type based on your data
 }
 
 const DeleteButton: React.FC<DeleteButtonProps> = ({ id }) => {
     const router = useRouter();
-
     const deletePost = async () => {
-    await fetch(`/api/deletePost`, {
+    console.log("id:",id);
+    await fetch(`/api/deletecollection`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",

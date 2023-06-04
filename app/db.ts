@@ -1,7 +1,6 @@
 import { MongoClient } from 'mongodb';
 
-const { MONGODB_URI } = process.env as any;
-const client = new MongoClient(MONGODB_URI);
+const client = new MongoClient("mongodb+srv://pond:mkLSSuDerzKcpM5U@database.drnsz71.mongodb.net/");
 
 let cachedDb: any = null;
 
