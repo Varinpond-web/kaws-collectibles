@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import getImageUrl from 'azureBlobStorage';
-
+import Image from "next/image";
 interface ImagePostProps {
   blobName: string;
 }
