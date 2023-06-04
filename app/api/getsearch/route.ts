@@ -7,7 +7,8 @@ export async function POST(request: any) {
     const users = await prisma.user.findMany({
         where: {
             name: {
-                startsWith: username
+                startsWith: username,
+                mode: 'insensitive'
             },
         },
         orderBy: {
