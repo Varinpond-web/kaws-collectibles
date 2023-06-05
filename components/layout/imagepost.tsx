@@ -25,7 +25,7 @@ export const ImagePost: React.FC<ImagePostProps> = ({ blobName }) => {
   return (
     <div className="animate-fade-up bg-gradient-to-br from-black to-stone-500 bg-clip-text font-display tracking-[-0.02em] text-transparent opacity-0 drop-shadow-sm"
     style={{ animationDelay: "0.15s", animationFillMode: "forwards" }}>
-        <img src={imageUrl} alt="Image" width={200} height={200}></img>
+        <img src={imageUrl} alt="Image" width={40} height={40}></img>
     </div>
   );
 };

@@ -55,9 +55,6 @@ export default function Page({ params }: { params: { username: string }}) {
         .then(data => setImage(data.image));
   }, [username]);
 
-  if (posts.length === 0) {
-    return <div>Loading...</div>;
-  }
   return (
     <div className="animate-fade-up bg-gradient-to-br from-black to-stone-500 bg-clip-text text-center font-display "
     style={{ animationDelay: "0.15s", animationFillMode: "forwards" }}>

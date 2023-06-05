@@ -22,9 +22,6 @@ export default function PostObject() {
     fetchData();
   }, []);
 
-  if (requests.length === 0) {
-    return <div>Loading...</div>;
-  }
 
   // put image in here
   return (
@@ -32,12 +29,12 @@ export default function PostObject() {
     style={{ animationDelay: "0.15s", animationFillMode: "forwards" }}>
       <h1 className="text-3xl font-bold mb-5">Request Collection</h1>
       <ul>
-        {requests.map((request, index) => (
+        {/* {requests.map((request, index) => (
             <li key={index} className="bg-white border border-gray-200 shadow-lg p-6 text-black mb-10">
                 <p className="text-sm mb-5">{request.content}</p>
                 <DeleteButtonRequest id={request.id} />
             </li>
-        ))}
+        ))} */}
       </ul>
       
       </div>

@@ -9,7 +9,7 @@ import { BlobServiceClient } from '@azure/storage-blob';
 import { v4 as uuidv4 } from 'uuid';
 import prisma from "@/app/prisma";
 import Link from "next/link";
-
+import SearchItem from "@/components/layout/searchcollection";
 export default function PostComponent() {
     const router = useRouter();
     const [title, setTitle] = useState('');
@@ -140,6 +140,18 @@ export default function PostComponent() {
               &nbsp;(no collection?)
               </Link></label>
             <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="title" type="text" placeholder="Enter Collection" value={collection} onChange={(e) => setCollection(e.target.value)}/>
+            <div className="origin-top-right absolute mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-10">
+                    <div
+                      className="py-1"
+                      role="menu"
+                      aria-orientation="vertical"
+                      aria-labelledby="options-menu"
+                    >
+                      <ul>
+                        <SearchItem search={collection}/>
+                      </ul>
+                    </div> 
+              </div>
           </div>
       </div>
   </div>  

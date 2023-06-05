@@ -113,12 +113,12 @@ export default function NavBar({ session }: { session: Session | null }) {
               >
                 Create post
               </Link>
-              <Link
+              {/* <Link
                 href="/myfeed"
                 className="block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-black mr-8"
               >
                 My feed
-              </Link>
+              </Link> */}
               <Link
                 href="/my-collectibles"
                 className="block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-black mr-8"

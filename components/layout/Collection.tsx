@@ -41,9 +41,6 @@ export default function PostObject() {
     setPrice(price);
   }
 
-  if (posts.length === 0) {
-    return <div>Loading...</div>;
-  }
   const editfunc = (id:string, title: any, date: any, price: any) => {
     editPost(title, date, price)
     setEdit(id);
