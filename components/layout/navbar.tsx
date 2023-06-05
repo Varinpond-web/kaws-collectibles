@@ -7,14 +7,35 @@ import { useSignInModal } from "./sign-in-modal";
 import UserDropdown from "./user-dropdown";
 import { Session } from "next-auth";
 import { SearchIcon } from "@heroicons/react/outline";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import SearchItem from "./searchitem";
+
 export default function NavBar({ session }: { session: Session | null }) {
   const { SignInModal, setShowSignInModal } = useSignInModal();
   const scrolled = useScroll(50);
   const [showMenu, setShowMenu] = useState(false);
   const [searchbar, setSearchbar] = useState(false);
   const [searchText, setSearchText] = useState("");
+  const [Admin, setIsAdmin] = useState(false);
+  
+  
+  useEffect(() => {
+    const name = session?.user?.name;
+    if (session){
+      fetch('/api/checkadmin', {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name }),
+      })
+      .then(response => response.json())
+      .then(data => setIsAdmin(data.isAdmin));
+      console.log("Admin",Admin);
+    }
+    
+  }, []);
+  
   const toggleMenu = () => {
     setShowMenu(!showMenu);
   };
@@ -105,12 +126,14 @@ export default function NavBar({ session }: { session: Session | null }) {
               >
                 My collectibles
               </Link>
-              <Link
+              {Admin ? (
+                <Link
                 href="/create-collection"
                 className="block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-black mr-8"
               >
                 Manage Collection
               </Link>
+              ) : (<></>)}
             </div>
           </div>
           <div className="ml-auto block lg:hidden">
