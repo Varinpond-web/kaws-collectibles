@@ -8,6 +8,7 @@ import { Buffer } from 'buffer';
 import { BlobServiceClient } from '@azure/storage-blob';
 import { v4 as uuidv4 } from 'uuid';
 import prisma from "@/app/prisma";
+import Link from "next/link";
 
 export default function PostComponent() {
     const router = useRouter();
@@ -133,7 +134,11 @@ export default function PostComponent() {
     </div>
     <div className="w-1/3 p-4">
       <div className="mb-6">
-            <label className="block text-gray-700 mb-2" >Collection</label>
+            <label className="block text-black-600 mb-2" >Collection<Link href="/request"
+                className="lg:inline-block text-blue-600 lg:mt-0 hover:text-blue-800 mr-8"
+              >
+              &nbsp;(no collection?)
+              </Link></label>
             <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="title" type="text" placeholder="Enter Collection" value={collection} onChange={(e) => setCollection(e.target.value)}/>
           </div>
       </div>

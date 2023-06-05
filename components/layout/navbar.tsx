@@ -126,12 +126,20 @@ export default function NavBar({ session }: { session: Session | null }) {
                 My collectibles
               </Link>
               {Admin ? (
+                <>
+                  <Link
+                  href="/create-collection"
+                  className="block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-black mr-8"
+                >
+                  Manage Collection
+                </Link>
                 <Link
-                href="/create-collection"
-                className="block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-black mr-8"
-              >
-                Manage Collection
-              </Link>
+                  href="/showrequest"
+                  className="block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-black mr-8"
+                >
+                  Request From User
+                </Link>
+              </>
               ) : (<></>)}  
             </div>
           </div>
