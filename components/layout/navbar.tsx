@@ -16,9 +16,9 @@ export default function NavBar({ session }: { session: Session | null }) {
   const [showMenu, setShowMenu] = useState(false);
   const [searchbar, setSearchbar] = useState(false);
   const [searchText, setSearchText] = useState("");
+  
+  
   const [Admin, setIsAdmin] = useState(false);
-  
-  
   useEffect(() => {
     const name = session?.user?.name;
     if (session){
@@ -31,7 +31,6 @@ export default function NavBar({ session }: { session: Session | null }) {
       })
       .then(response => response.json())
       .then(data => setIsAdmin(data.isAdmin));
-      console.log("Admin",Admin);
     }
     
   }, []);
@@ -133,7 +132,7 @@ export default function NavBar({ session }: { session: Session | null }) {
               >
                 Manage Collection
               </Link>
-              ) : (<></>)}
+              ) : (<></>)}  
             </div>
           </div>
           <div className="ml-auto block lg:hidden">

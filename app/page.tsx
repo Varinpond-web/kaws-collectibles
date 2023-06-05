@@ -1,22 +1,11 @@
 import Balancer from "react-wrap-balancer";
 import PostObject from "@/components/layout/post";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
+  
 export default async function Home() {
-  const { stargazers_count: stars } = await fetch(
-    "https://api.github.com/repos/steven-tey/precedent",
-    {
-      ...(process.env.GITHUB_OAUTH_TOKEN && {
-        headers: {
-          Authorization: `Bearer ${process.env.GITHUB_OAUTH_TOKEN}`,
-          "Content-Type": "application/json",
-        },
-      }),
-      // data will revalidate every 60 seconds
-      next: { revalidate: 60 },
-    },
-  )
-    .then((res) => res.json())
-    .catch((e) => console.log(e));
+  const session = await getServerSession(authOptions);
   
   return (
     <>
@@ -27,7 +16,7 @@ export default async function Home() {
         >
           <Balancer className="text-2xl text-center my-8">Hottest post  !</Balancer>
           <ul>
-            <PostObject/>
+            <PostObject session={session}/>
           </ul>
         </h3>
       </div>

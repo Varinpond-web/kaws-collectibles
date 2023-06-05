@@ -6,13 +6,15 @@ export async function POST(request: any) {
     const { name } = await request.json();
     const db = await connectDatabase();
     const postsCollection = db.collection('Admin-role');
-    console.log("name",name);  
+     
     const user = await postsCollection.findOne({ name: name });
     if (!user) {
         return NextResponse.json({ isAdmin: false });
     }
     if (user.role === 'Super Admin') {
+        console.log("isAdmin: true"); 
         return NextResponse.json({ isAdmin: true });
+        
     }else{
         return NextResponse.json({ isAdmin: false });
     }

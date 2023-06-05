@@ -6,6 +6,7 @@ import React from 'react';
 import getImageUrl from 'azureBlobStorage';
 import { ImagePost } from './imagepost';
 import { useSession } from "next-auth/react"
+import { Session } from "next-auth";
 interface Post {
   id: number; // or string, depending on your data structure
   title: string;
@@ -15,16 +16,31 @@ interface Post {
   // Include any other fields that a Post object might have
 }
 
-export default function PostObject() {
-  const { data: session, status } = useSession()
+export default function PostObject({ session }: { session: Session | null }) {
   const [posts, setPosts] = useState<Post[]>([]);
-
+  const [Admin, setIsAdmin] = useState(false);
   useEffect(() => {
-    fetch('/api/getpost', {method: "POST",headers: {
-      "Content-Type": "application/json",
-    },body: JSON.stringify({}),})
-      .then(response => response.json())
-      .then(data => setPosts(data));
+    const fetchData = async () => {
+      const name = await session?.user?.name;
+      if (session){
+        await fetch('/api/checkadmin', {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ name }),
+        })
+        .then(response => response.json())
+        .then(data => setIsAdmin(data.isAdmin));
+      }
+      await fetch('/api/getpost', {method: "POST",headers: {
+        "Content-Type": "application/json",
+      },body: JSON.stringify({}),})
+        .then(response => response.json())
+        .then(data => setPosts(data));
+    }
+    fetchData();
+    console.log("Admin",Admin);
   }, []);
 
   if (posts.length === 0) {
@@ -41,7 +57,7 @@ export default function PostObject() {
               <p className="text-sm">{post.content}</p>
               <ImagePost blobName={post.pictureId}/>
               <p className="text-sm">by {post.userName}</p>
-              {session?.user?.name === post.userName && <DeleteButton id={post.id} />} 
+              {session?.user?.name === post.userName || Admin ? (<DeleteButton id={post.id} />):(<></>) } 
           </li>
       ))}
       </div>
