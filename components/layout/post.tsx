@@ -7,12 +7,14 @@ import getImageUrl from 'azureBlobStorage';
 import { ImagePost } from './imagepost';
 import { useSession } from "next-auth/react"
 import { Session } from "next-auth";
+import Link from "next/link";
 interface Post {
   id: number; // or string, depending on your data structure
   title: string;
   content: string;
   userName: string;
   pictureId: string;
+  collection: string;
   // Include any other fields that a Post object might have
 }
 
@@ -55,7 +57,9 @@ export default function PostObject({ session }: { session: Session | null }) {
           <li key={index} className="bg-white border border-gray-200 rounded shadow-lg p-6 text-black mb-10">
               <h2 className="text-lg">Title: {post.title}</h2>
               <p className="text-sm">{post.content}</p>
-              <ImagePost blobName={post.pictureId}/>
+              <ImagePost blobName={post.pictureId} width={500} height={300}/>
+              <Link href={`/collections/${post.collection}`}><p className="text-sm">Collection: {post.collection}</p></Link>
+              
               <p className="text-sm">by {post.userName}</p>
               {session?.user?.name === post.userName || Admin ? (<DeleteButton id={post.id} />):(<></>) } 
           </li>

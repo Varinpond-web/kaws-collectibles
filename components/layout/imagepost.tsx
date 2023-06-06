@@ -3,9 +3,11 @@ import getImageUrl from 'azureBlobStorage';
 import Image from "next/image";
 interface ImagePostProps {
   blobName: string;
+  width: number;
+  height: number;
 }
 
-export const ImagePost: React.FC<ImagePostProps> = ({ blobName }) => {
+export const ImagePost: React.FC<ImagePostProps> = ({ blobName, width, height }) => {
   const [imageUrl, setImageUrl] = useState<string | null>(null);
   
   useEffect(() => {
@@ -25,7 +27,7 @@ export const ImagePost: React.FC<ImagePostProps> = ({ blobName }) => {
   return (
     <div className="animate-fade-up bg-gradient-to-br from-black to-stone-500 bg-clip-text font-display tracking-[-0.02em] text-transparent opacity-0 drop-shadow-sm"
     style={{ animationDelay: "0.15s", animationFillMode: "forwards" }}>
-        <img src={imageUrl} alt="Image" width={40} height={40}></img>
+        <img src={imageUrl} alt="Image" width={width || 20} height={height || 20}></img>
     </div>
   );
 };

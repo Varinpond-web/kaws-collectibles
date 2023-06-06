@@ -84,7 +84,7 @@ export default function Page({ params }: { params: { username: string }}) {
       <div/>
       <div className='bg-white border border-gray-200 rounded shadow-lg p-6 text-black mb-10 grid grid-cols-3 gap-4'>
         {posts.map((post,index) => (
-          <ImagePost key={index} blobName={post.pictureId}/>
+          <ImagePost key={index} width={500} height={300} blobName={post.pictureId}/>
         ))}
       </div>
     </div>

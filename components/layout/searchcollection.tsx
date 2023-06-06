@@ -10,7 +10,12 @@ interface Post {
     pictureId: string;
   }
 
-export default function SearchItem({search}:{search: string}) {
+interface SearchItemProps {
+search: string;
+onTitleClick: (title: string) => void;
+}
+
+const SearchItem: React.FC<SearchItemProps> = ({search, onTitleClick}) => {
     const [posts, setPosts] = useState<Post[]>([]);
     useEffect(() => {
         fetch('/api/getsearchcollection', {method: "POST",headers: {
@@ -25,8 +30,8 @@ export default function SearchItem({search}:{search: string}) {
         {posts.map((post, index) => (
             <div key={index}>
                 <li className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">
-                    <div className="flex items-center">
-                        <ImagePost blobName={post.pictureId} />
+                    <div className="flex items-center" onClick={() => onTitleClick(post.title)}>
+                        <ImagePost blobName={post.pictureId} width={20} height={20} />
                         <p>{post.title}</p>
                     </div>
                 </li>
@@ -36,3 +41,4 @@ export default function SearchItem({search}:{search: string}) {
     )
 
 }
+export default SearchItem;

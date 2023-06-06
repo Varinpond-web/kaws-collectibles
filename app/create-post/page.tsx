@@ -20,6 +20,11 @@ export default function PostComponent() {
     const [imageId, setimageId] = useState<string | null>(null);
     const [collection, setCollection] = useState('');
     const [uploadResponse, setUploadResponse] = useState(null);
+    const [selectedTitle, setSelectedTitle] = useState("");
+
+    const handleTitle = (title:any) => {
+      setCollection(title);
+    }
     const [file, setFile] = useState<string | null>(null);
     useEffect(() => {
       const fetchUpload = async () => {
@@ -148,7 +153,7 @@ export default function PostComponent() {
                       aria-labelledby="options-menu"
                     >
                       <ul>
-                        <SearchItem search={collection}/>
+                        <SearchItem search={collection} onTitleClick={handleTitle}/>
                       </ul>
                     </div> 
               </div>
