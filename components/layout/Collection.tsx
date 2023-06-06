@@ -61,7 +61,7 @@ export default function PostObject() {
                     onChange={handleTitleChange}
                     className="text-lg"
                   />
-                  <ImagePost blobName={post.pictureId} />
+                  <ImagePost width={500} height={300}  blobName={post.pictureId} />
                   <input
                     type="text"
                     value={publishedDate}
@@ -81,7 +81,7 @@ export default function PostObject() {
             </>
             ):(<>
               <h2 className="text-lg">{post.title}</h2>
-              <ImagePost blobName={post.pictureId} />
+              <ImagePost width={500} height={300} blobName={post.pictureId} />
               <p className="text-sm">published year: {post.publishedDate}</p>
               <p className="text-sm">price: {post.price}$</p>
               <DeleteButton id={post.id} />

@@ -48,7 +48,7 @@ export default function PostObject() {
       <div style={{columnCount: 3}} className="column-gap-4">
         {posts.map((post, index) => (
           <div key={index} className="w-full bg-white rounded-lg shadow mb-4 break-inside">
-            <ImagePost blobName={post.pictureId}/>
+            <ImagePost width={500} height={300} blobName={post.pictureId}/>
             <h2 className="text-lg p-2 text-black">{post.title}</h2>
           </div>
         ))}
