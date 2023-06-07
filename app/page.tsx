@@ -14,7 +14,7 @@ export default async function Home() {
           className="animate-fade-up bg-gradient-to-br from-black to-stone-500 bg-clip-text font-display tracking-[-0.02em] text-transparent opacity-0 drop-shadow-sm"
           style={{ animationDelay: "0.15s", animationFillMode: "forwards" }}
         >
-          <Balancer className="text-2xl text-center my-8">Hottest post  !</Balancer>
+          {/* <Balancer className="text-2xl text-center my-8">Hottest post  !</Balancer> */}
           <ul>
             <PostObject session={session}/>
           </ul>

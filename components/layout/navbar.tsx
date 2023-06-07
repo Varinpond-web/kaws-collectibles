@@ -107,11 +107,13 @@ export default function NavBar({ session }: { session: Session | null }) {
             }`}
           >
             <div className="ml-auto">
+            {session ? (
+            <>
               <Link
                 href="/create-post"
                 className="block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-black mr-8"
               >
-                Create post
+                Create Post
               </Link>
               {/* <Link
                 href="/myfeed"
@@ -123,13 +125,14 @@ export default function NavBar({ session }: { session: Session | null }) {
                 href="/my-collectibles"
                 className="block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-black mr-8"
               >
-                My collectibles
+                My Collectibles
               </Link>
+            </>) : (<></>)}
               <Link
                 href="/collection"
                 className="block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-black mr-8"
               >
-                Public collection
+                Public Collection
               </Link>
               {Admin ? (
                 <>

@@ -81,7 +81,7 @@ export default function PostObject({ session }: { session: Session | null }) {
                   className="w-10 rounded-full"
                 />
                   {/* <img className="w-10 rounded-full" src="https://d2qp0siotla746.cloudfront.net/img/use-cases/profile-picture/template_3.jpg" alt="sara" /> */}
-                  <h2 className="text-gray-800 font-bold cursor-pointer">{post.userName}</h2>
+                  <Link href={`/profile/${post.userName}`}><h2 className="text-gray-800 font-bold cursor-pointer">{post.userName}</h2></Link>
                 </div>
                 <div className="flex space-x-2">
                   <div className="flex space-x-1 items-center">

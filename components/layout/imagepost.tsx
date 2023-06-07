@@ -25,9 +25,6 @@ export const ImagePost: React.FC<ImagePostProps> = ({ blobName, width, height })
   }
 
   return (
-    <div className="animate-fade-up bg-gradient-to-br from-black to-stone-500 bg-clip-text font-display tracking-[-0.02em] text-transparent opacity-0 drop-shadow-sm"
-    style={{ animationDelay: "0.15s", animationFillMode: "forwards" }}>
-        <img src={imageUrl} alt="Image" width={width || 20} height={height || 20}></img>
-    </div>
+        <img className='item-center justify-center' src={imageUrl} alt="Image" width={width || 20} height={height || 20}></img>
   );
 };
