@@ -6,8 +6,9 @@ import Nav from "@/components/layout/nav";
 import Footer from "@/components/layout/footer";
 import { Suspense } from "react";
 import Provider from "@/components/Provider";
-
-
+import 'tailwindcss/tailwind.css'
+import getImageUrl from 'azureBlobStorage';
+import Image from 'next/image';
 export const metadata = {
   title: "Precedent - Building blocks for your Next.js project",
   description:
@@ -28,16 +29,27 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const containerName = 'image';
+  const url = await getImageUrl(containerName, "wallpaper.png");
   return (
     <html lang="en">
       <body className={cx(sfPro.variable, inter.variable)}>
         <Provider>
-          <div className="fixed h-screen w-full bg-gradient-to-br from-indigo-50 via-white to-cyan-100" />
+          
+          <div className="fixed h-screen w-full from-indigo-50 via-white to-cyan-100" />
           <Suspense fallback="...">
             {/* @ts-expect-error Server Component */}
             <Nav />
           </Suspense>
           <main className="flex min-h-screen w-full flex-col items-center justify-center py-32">
+          <div className="fixed inset-0 z-negative">
+            <Image
+                src="https://varinstorage.blob.core.windows.net/image/wallpaper.png"
+                alt="background image"
+                layout="fill"
+                objectFit="cover"
+            />
+          </div>
             {children}
           </main>
         </Provider>

@@ -8,6 +8,10 @@ module.exports = {
   },
   theme: {
     extend: {
+      backgroundImage: {
+        'hero-pattern': "url('https://varinstorage.blob.core.windows.net/image/wallpaper.png')",
+        'footer-texture': "url('https://varinstorage.blob.core.windows.net/image/wallpaper.png')",
+      },
       fontFamily: {
         display: ["var(--font-sf)", "system-ui", "sans-serif"],
         default: ["var(--font-inter)", "system-ui", "sans-serif"],
