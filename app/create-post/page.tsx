@@ -46,6 +46,7 @@ export default function PostComponent() {
                 pictureImage: imageId.toString(),
                 collection: collection,
                 published: true,
+                userimage: session?.user?.image,
             }),
           });
           setUploadResponse(await upload.json());

@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 
 export async function POST(request: any) {
   try {
-    const { title, content, userName, pictureImage, published, collection } = await request.json();
+    const { title, content, userName, pictureImage, published, collection, userimage } = await request.json();
     const db = await connectDatabase();
     const postsCollection = db.collection('Post');
 
@@ -22,6 +22,7 @@ export async function POST(request: any) {
       pictureId: pictureImage,
       published: true,
       collection: collection,
+      userimage: userimage,
     };
     const insertedPost = await postsCollection.insertOne(post);
 

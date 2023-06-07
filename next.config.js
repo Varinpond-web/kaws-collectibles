@@ -16,7 +16,7 @@ const nextConfig = {
   },
   swcMinify: true,
   images: {
-    domains: ["varinstorage.blob.core.windows.net","lh3.googleusercontent.com", "vercel.com",'dl.dropboxusercontent.com','www.dropbox.com'],
+    domains: ["d2qp0siotla746.cloudfront.net","varinstorage.blob.core.windows.net","lh3.googleusercontent.com", "vercel.com",'dl.dropboxusercontent.com','www.dropbox.com'],
   },
   async redirects() {
     return [

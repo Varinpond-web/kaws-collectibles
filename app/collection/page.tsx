@@ -9,6 +9,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { ImagePost } from '@/components/layout/imagepost';
 import Balancer from "react-wrap-balancer";
 import Collection from "@/components/layout/Collectionforuser";
+import Link from "next/link";
 interface Post {
   id:  string;
   title: string;
@@ -103,7 +104,7 @@ export default function PostComponent() {
             {showPopup && popupPost &&
                 <div className="fixed inset-0 flex items-center justify-center z-50 bg-white bg-opacity-75">
                     <div className="popup bg-white text-black p-5 rounded shadow-lg flex flex-col items-center">
-                        <h3 className="text-2xl mb-4">{popupPost.title}</h3>
+                        <h3 className="text-2xl mb-4">{popupPost.title}<Link href={`/collections/${popupPost.title}`} className={"text-blue-700 hover:text-blue-900"}>&nbsp;(see collection post?)</Link></h3>
                         <ImagePost blobName={popupPost.pictureId} width={390} height={100}/>
                         <p className="mb-2">Publish Date: {popupPost.publishedDate}</p>
                         <p className="mb-4">Price: {popupPost.price}$</p>
