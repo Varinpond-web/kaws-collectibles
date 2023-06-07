@@ -22,9 +22,12 @@ const DeleteButton: React.FC<DeleteButtonProps> = ({ id }) => {
         router.refresh();
     };
     return (
-        <button className="mb-8 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" onClick={deletePost}>
+        // <button className=" bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" onClick={deletePost}>
+        //     Delete
+        // </button>
+        <p className=" text-red-600 hover:underline text-base font-normal py-2 px-4 rounded focus:outline-none focus:shadow-outline" onClick={deletePost}>
             Delete
-        </button>
+        </p>
     );
 }
 

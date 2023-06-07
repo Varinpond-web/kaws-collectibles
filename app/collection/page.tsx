@@ -89,16 +89,19 @@ export default function PostComponent() {
 
   
     return (
-      <div className="animate-fade-up bg-gradient-to-br from-black to-stone-500 bg-clip-text font-display tracking-[-0.02em] text-transparent opacity-0 drop-shadow-sm"
+      <div className="animate-fade-up bg-gradient-to-br from-black to-stone-500 bg-clip-text font-display tracking-[-0.02em] text-transparent opacity-0 drop-shadow-sm px-16"
       style={{ animationDelay: "0.15s", animationFillMode: "forwards" }}>
         <h1 className="text-3xl font-bold mb-5">Public Collection</h1>
         <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="title" type="text" placeholder="Enter Collection" value={collection} onChange={(e) => setCollection(e.target.value)}/>
             <ul>
-            <div style={{columnCount: 3}} className="column-gap-4">
+            <div className="grid grid-cols-3 gap-4 justify-end items-end">
             {posts.map((post, index) => (
-                <div key={index} className="w-full bg-white rounded-lg shadow mb-4 break-inside" onClick={() => { setPopupPost(post); setShowPopup(true); }}>
+              
+                <div key={index} onClick={() => { setPopupPost(post); setShowPopup(true); }}>
+                  <div className="bg-white shadow-xs cursor-pointer">
                     <ImagePost blobName={post.pictureId} width={300} height={300}/>
                     <h2 className="text-lg p-2 text-black">{post.title}</h2>
+                  </div>
                 </div>
             ))}
             {showPopup && popupPost &&

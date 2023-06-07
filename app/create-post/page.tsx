@@ -102,18 +102,19 @@ export default function PostComponent() {
 
   
     return (
-      <div className="animate-fade-up bg-gradient-to-br from-black to-stone-500 bg-clip-text font-display tracking-[-0.02em] text-transparent opacity-0 drop-shadow-sm"
+      <div className="animate-fade-up bg-gradient-to-br px-28 from-black to-stone-500 bg-clip-text font-display tracking-[-0.02em] text-transparent opacity-0 drop-shadow-sm"
   style={{ animationDelay: "0.15s", animationFillMode: "forwards" }}>
   <h1 className="text-3xl font-bold mb-5">Create Post from {session?.user?.name}</h1>
   <div className="flex">
     <div className="w-1/3 p-4">
-      <div className="img-area w-full md:w-1/2">
+      <div className="img-area w-full">
         <div className="flex justify-center">
           <label htmlFor="image">
             <img
               src={file || 'https://varinstorage.blob.core.windows.net/image/Browseforfiles.png'}
               className="cursor-pointer rounded-xl shadow-md"
-              style={{ width: "100%", height: "100%" }}
+              style={{ width: "400", height: "100%" }}
+              alt="file post"
             />
           </label>
         </div>

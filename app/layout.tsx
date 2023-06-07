@@ -41,7 +41,8 @@ export default async function RootLayout({
             {/* @ts-expect-error Server Component */}
             <Nav />
           </Suspense>
-          <main className="flex min-h-screen w-full flex-col items-center justify-center py-32">
+          <main className="flex min-h-screen w-full flex-col items-center py-32">
+          {/* <main className="flex w-full flex-col items-center justify-center"> */}
           <div className="fixed inset-0 z-negative">
             <Image
                 src="https://varinstorage.blob.core.windows.net/image/wallpaper.png"

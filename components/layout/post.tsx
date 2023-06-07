@@ -64,10 +64,10 @@ export default function PostObject({ session }: { session: Session | null }) {
           //     <p className="text-sm">by {post.userName}</p>
           //     {session?.user?.name === post.userName || Admin ? (<DeleteButton id={post.id} />):(<></>) } 
           // </li>
-            <div key={index} className="pb-2 justify-center mb-20 max-w-lg container bg-white rounded-xl shadow-2xl transform transition duration-500 hover:scale-105 hover:shadow-2xl">
+            <div key={index} className="pb-2 justify-center mb-20 max-w-lg container bg-white rounded-xl shadow-2xl transform transition duration-500 hover:shadow-2xl">
               <div className='pt-2'>
-                <h1 className="text-2xl mt-2 ml-4 font-bold text-gray-800 cursor-pointer hover:text-gray-900 transition duration-100">{post.title}</h1>
-                <Link href={`/collections/${post.collection}`}><p className="ml-4 mt-1 mb-2 text-gray-700 hover:underline cursor-pointer">#{post.collection}</p></Link>
+                <h1 className="text-2xl mt-2 ml-4 font-bold text-gray-800 cursor-pointer hover:text-gray-900 transition duration-100">{post.title}<span className='absolute right-0'>{session?.user?.name === post.userName || Admin ? (<DeleteButton id={post.id} />):(<></>) } </span></h1>
+                <Link href={`/collections/${post.collection}`}><p className="ml-4 mt-1 mb-2 text-blue-600 hover:underline cursor-pointer">#{post.collection}</p></Link>
               </div>
               <ImagePost blobName={post.pictureId} width={500} height={300}/>
               {/* <img className="w-full cursor-pointer" src="https://images.unsplash.com/photo-1525268771113-32d9e9021a97?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="" /> */}
