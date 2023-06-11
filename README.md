@@ -1,5 +1,5 @@
 <h1>KAWS Collectibles<h1>
-https://precedent-blue-omega.vercel.app/collections/Separated%20-%20black
+<p>https://precedent-blue-omega.vercel.app/collections/Separated%20-%20black<p>
 
 ![image](https://github.com/Varinpond-web/kaws-collectibles/assets/130687857/72ba76c2-6125-4c78-ac2b-81f851894d29)
   
